@@ -1,0 +1,17 @@
+[33mcommit 76e9843b7e422e9a14539e041112d1d3364f81a0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Andy Ye <deliciousbrain42@gmail.com>
+Date:   Fri Aug 30 22:53:12 2024 -0400
+
+    added endpoint for retrieving submissions
+
+[33mcommit cc0a6bababee1713152816727d63bff86de44f4b[m
+Author: Andy Ye <deliciousbrain42@gmail.com>
+Date:   Fri Aug 30 22:51:39 2024 -0400
+
+    added endpoint for retrieving submissions
+
+[33mcommit 18e845fc3c79a56f0beb245517747b93d09404a4[m
+Author: Andy Ye <deliciousbrain42@gmail.com>
+Date:   Fri Aug 30 22:50:21 2024 -0400
+
+    added endpoint for retrieving submissions

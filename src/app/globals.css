@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .navlink {
+    @apply list-none font-semibold flex justify-center items-center text-[15px] h-full pb-0.5 px-3 hover:text-palette-1;
+  }
+  .active-navlink {
+    @apply list-none font-semibold flex justify-center items-center text-[15px] h-full pb-0.5 px-3 text-palette-1 bg-palette-3;
+  }
+  .responsive-navlink {
+    @apply list-none w-full font-medium text-lg px-6 py-4 hover:bg-palette-2 hover:text-white duration-200;
+  }
+
+  .btn {
+    @apply font-bold px-4 rounded-lg duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-x-2 my-2 active:scale-90 disabled:pointer-events-none;
+  }
+
+  .primary-btn {
+    @apply bg-palette-1 shadow shadow-palette-1/30 text-white  hover:bg-palette-2;
+  }
+
+  .secondary-btn {
+    @apply bg-palette-4 shadow shadow-palette-1/30 text-palette-1  hover:bg-palette-3;
+  }
+  .red-btn {
+    @apply bg-red-500 text-white hover:bg-red-400;
+  }
+
+  .page-margins {
+    @apply m-auto w-[min(1075px,97%)];
+  }
+
+  .navbar-margins {
+    @apply m-auto w-[min(1275px,98%)];
+  }
+
+  .link {
+    @apply text-palette-1 underline hover:text-palette-2 cursor-pointer;
+  }
+
+  .contest-container {
+    @apply bg-white w-full flex shadow px-8 py-6 rounded min-h-full min-h-[calc(100vh-292px)];
+  }
+
+  .blog-container {
+    @apply bg-white w-full flex shadow px-8 py-6 rounded;
+  }
+
+  .dashboard-container {
+    @apply bg-white w-full flex shadow px-8 py-6 rounded;
+  }
+
+  .input {
+    @apply border-b-2 disabled:bg-transparent border-neutral-300 w-full h-full placeholder-transparent whitespace-normal focus:outline-none px-1 disabled:cursor-not-allowed;
+  }
+
+  .input-underline {
+    @apply absolute w-full h-0.5 bottom-0 bg-palette-5 scale-x-0 peer-focus:scale-x-100 duration-300;
+  }
+
+  .input-label {
+    @apply absolute -top-3 text-sm enabled:text-neutral-300 left-[4px] peer-placeholder-shown:top-[calc(50%-8px)] peer-placeholder-shown:left-[4px] peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-500 peer-placeholder-shown:leading-none peer-focus:-top-3 peer-focus:text-palette-5 peer-focus:leading-none leading-none peer-focus:text-sm peer-focus:left-[4px] transition-all duration-200 ease-in-out pointer-events-none;
+  }
+
+  .tab {
+    @apply relative hover:text-palette-1 w-full text-text-2 flex items-center justify-center gap-x-2 text-lg font-medium duration-300 py-3;
+  }
+
+  .active-tab {
+    @apply relative w-full bg-palette-4 text-palette-1 flex items-center justify-center gap-x-2 text-lg rounded font-medium py-3;
+  }
+
+  .loading-spinner-small {
+    @apply animate-spin inline-block w-5 h-5 border-[4px] border-t-transparent border-b-transparent text-white rounded-full;
+  }
+
+  .loading-spinner-large {
+    @apply animate-spin inline-block w-8 h-8 border-[6px] border-t-transparent border-b-transparent text-white rounded-full;
+  }
+
+  .disabled-info {
+    @apply absolute text-white bottom-full bg-neutral-900/80 text-xs font-normal rounded px-3 py-1.5 whitespace-nowrap after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-4 after:border-transparent after:border-t-neutral-900/80 group-hover:opacity-100 opacity-0 after:z-50 z-50;
+  }
+}
+
+@layer base {
+  html {
+    @apply overflow-y-scroll overflow-x-hidden bg-bg-1;
+  }
+  h1 {
+    @apply font-bold text-text-1 text-6xl;
+  }
+  h2 {
+    @apply font-bold text-text-1 text-3xl;
+  }
+  h3 {
+    @apply font-semibold text-text-1 text-2xl;
+  }
+  h4 {
+    @apply font-medium text-text-1 text-xl;
+  }
+  h5 {
+    @apply font-medium text-text-1 text-lg;
+  }
+  h6 {
+    @apply font-medium text-base text-text-1;
+  }
+
+  hr {
+    @apply border-0 h-[1px] bg-neutral-200 border-t-[1px];
+  }
+
+  thead {
+    @apply uppercase;
+  }
+  th {
+    @apply py-3 rounded-t font-semibold text-text-1 text-sm cursor-pointer text-start  border-b;
+  }
+  td {
+    @apply py-3 max-w-[160px] text-[15px];
+  }
+  tbody {
+    @apply text-text-1 text-base text-center;
+  }
+  tr {
+    @apply text-start last:border-b-0 border-b text-sm;
+  }
+
+  label,
+  p {
+    @apply text-text-2 text-[15.5px];
+  }
+
+  li {
+    @apply ml-12;
+  }
+
+  ul {
+    @apply list-disc flex flex-col gap-y-2;
+  }
+
+  ol {
+    @apply list-decimal -ml-8 flex flex-col gap-y-2 mt-2;
+  }
+
+  pre {
+    @apply shadow m-0 rounded bg-white;
+  }
+  code {
+    @apply overflow-hidden;
+  }
+}
