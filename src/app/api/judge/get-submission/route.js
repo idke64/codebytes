@@ -73,7 +73,7 @@ export async function POST(req) {
 
     const averageTime = times.reduce((acc, c) => acc + c, 0) / times.length;
 
-    await addDocument(["submissions"], {
+    const submissionId = await addDocument(["submissions"], {
       tokens: tokens,
       problem_name: problemName,
       problem_id: problemId,
@@ -91,7 +91,11 @@ export async function POST(req) {
     });
 
     return NextResponse.json(
-      { participantData: participantData, submissionData: submissionData },
+      {
+        participantData: participantData,
+        submissionData: submissionData,
+        submissionId: submissionId,
+      },
       { status: 200 }
     );
   } catch (error) {

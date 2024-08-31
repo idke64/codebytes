@@ -91,6 +91,7 @@ function ContestProblems() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState();
+  const [submissionId, setSubmissionId] = useState();
   const router = useRouter();
 
   const { user, userData } = useAuth();
@@ -146,6 +147,7 @@ function ContestProblems() {
         );
         if (latestSubmissionData && latestSubmissionData.length > 0) {
           setLatestSubmission(latestSubmissionData[0]);
+          setSubmissionId(latestSubmissionData[0].id);
         }
       };
       fetchLatestSubmission();
@@ -156,13 +158,6 @@ function ContestProblems() {
 
   const inputRef = useRef();
   const outputRef = useRef();
-
-  const options = {
-    minimap: {
-      enabled: false,
-      readOnly: false,
-    },
-  };
 
   const handleCopy = (index, text) => {
     clipboardCopy(text);
@@ -178,21 +173,12 @@ function ContestProblems() {
     editorRef.current = editor;
   };
 
-  let intervalId = null;
-
   const handleCodeSubmit = async () => {
-    if (intervalId !== null) {
-      clearInterval(intervalId);
-      intervalId = null;
-    }
-    if (!user) {
-      router.push("/login");
-      return;
-    }
     try {
       setSubmitted(true);
       setLoading(true);
-      setSubmission([]);
+      setSubmission(null);
+      setSubmissionId(null);
 
       const submitResponse = await fetch("/api/judge/submit", {
         method: "POST",
@@ -240,6 +226,7 @@ function ContestProblems() {
           }
           setSubmission(submissionResults.submissionData);
           setParticipant(submissionResults.participantData);
+          setSubmissionId(submissionResults.submissionId);
           setLoading(false);
         } else {
           console.log("poopospdosd");
@@ -535,17 +522,9 @@ function ContestProblems() {
                 <div className="self-end relative group flex justify-center">
                   <button
                     className="btn primary-btn h-9 relative"
-                    disabled={!latestSubmission && !submission}
+                    disabled={(!latestSubmission && !submission) || loading}
                   >
-                    <Link
-                      href={`/submissions/${
-                        submission
-                          ? submission.id
-                          : latestSubmission
-                          ? latestSubmission.id
-                          : ""
-                      }`}
-                    >
+                    <Link href={`/submissions/${submissionId}`}>
                       View Submission
                     </Link>
                   </button>

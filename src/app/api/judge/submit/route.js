@@ -5,7 +5,7 @@ export async function POST(req) {
 
   const getTestcases = async () => {
     //fetches testcases from github "database"
-    const url = `https://raw.githubusercontent.com/idke64/codebytes-database/main/problems/${problem_id}/data.jsons`;
+    const url = `https://raw.githubusercontent.com/idke64/codebytes-database/main/problems/${problem_id}/data.json`;
 
     try {
       const response = await fetch(url, {
@@ -16,7 +16,8 @@ export async function POST(req) {
         },
       });
       if (response.ok) {
-        return await response.json();
+        const data = await response.json();
+        return data;
       }
     } catch (err) {
       console.error(err);
@@ -29,7 +30,6 @@ export async function POST(req) {
   let tokens = "";
   try {
     const testcases = await getTestcases();
-    console.log(testcases);
 
     const inputs = testcases.inputs;
     const outputs = testcases.outputs;
