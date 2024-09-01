@@ -113,6 +113,7 @@ async function getSubmissionData(url) {
       try {
         const getResponse = await fetch(url, { method: "GET" });
         const results = await getResponse.text();
+
         const submissionData = JSON.parse(results).submissions;
 
         let running = false;
@@ -129,8 +130,7 @@ async function getSubmissionData(url) {
           resolve(submissionData);
         }
       } catch (error) {
-        clearInterval(intervalId);
-        reject(error);
+        console.error("Error fetching submission data, retrying...", error);
       }
     }, 5000);
 

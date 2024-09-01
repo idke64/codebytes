@@ -220,7 +220,6 @@ function ContestProblems() {
         const submissionResults = await submissionResponse.json();
         if (submissionResponse.ok) {
           if (submissionResults.status === 500) {
-            console.log("poop");
             setLoading(false);
             return;
           }
@@ -229,7 +228,6 @@ function ContestProblems() {
           setSubmissionId(submissionResults.submissionId);
           setLoading(false);
         } else {
-          console.log("poopospdosd");
           setLoading(false);
         }
       } else {
@@ -489,7 +487,7 @@ function ContestProblems() {
               </div>
               <div className="flex gap-y-2 flex-col">
                 <h5>Results</h5>
-                <div className="w-full grid grid-cols-10 max-sm:grid-cols-2 max-lg:grid-cols-5 gap-x-3 mt-3">
+                <div className="w-full grid grid-cols-10 max-sm:grid-cols-2 max-lg:grid-cols-5 gap-3 mt-3">
                   {submission && submission.length != 0 ? (
                     submission.map((submission, index) => (
                       <TestcaseResult
