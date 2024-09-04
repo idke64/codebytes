@@ -4,6 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { documentId, limit, orderBy, where } from "firebase/firestore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import defaultprofile from "@/assets/pictures/defaultprofile.png";
 
 function Dashboard() {
   const { user, userData } = useAuth();
@@ -69,11 +70,11 @@ function Dashboard() {
                 <table className="w-full">
                   <thead>
                     <tr>
-                      <th>Contest</th>
-                      <th>Date</th>
-                      <th>Total Points</th>
-                      <th>Distribution</th>
-                      <th className="w-4"></th>
+                      <th className="min-w-[160px]">Contest</th>
+                      <th className="min-w-[120px]">Date</th>
+                      <th className="min-w-[140px]">Total Points</th>
+                      <th className="min-w-[140px]">Distribution</th>
+                      <th className="min-w-[20px]"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -119,17 +120,17 @@ function Dashboard() {
             </div>
             {submissions && submissions.length != 0 ? (
               <>
-                <div className="rounded border overflow-hidden flex flex-col gap-y-3 px-4">
+                <div className="rounded border overflow-x-auto flex flex-col gap-y-3 px-4">
                   <table className="w-full">
                     <thead>
                       <tr>
-                        <th>Submitted</th>
-                        <th>Problem</th>
-                        <th>Language</th>
-                        <th>Score</th>
-                        <th>Time</th>
-                        <th>Memory</th>
-                        <th className="w-4"></th>
+                        <th className="min-w-[140px]">Submitted</th>
+                        <th className="min-w-[140px]">Problem</th>
+                        <th className="min-w-[100px]">Language</th>
+                        <th className="min-w-[100px]">Score</th>
+                        <th className="min-w-[120px]">Time</th>
+                        <th className="min-w-[120px]">Memory</th>
+                        <th className="min-w-[20px]"></th>
                       </tr>
                     </thead>
                     <tbody>

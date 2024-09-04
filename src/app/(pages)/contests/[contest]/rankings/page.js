@@ -43,8 +43,11 @@ function ContestRankings() {
       );
       for (let i = 0; i < participantsData.length; i++) {
         const userData = await getDocument(["users"], participantsData[i].id);
-        participantsData[i].team_name = userData.team_name;
-        participantsData[i].school = userData.school;
+        if (!userData) {
+          continue;
+        }
+        participantsData[i].team_name = userData?.team_name;
+        participantsData[i].school = userData?.school;
       }
 
       for (let i = 0; i < participantsData.length; i++) {
@@ -105,9 +108,8 @@ function ContestRankings() {
                   <thead>
                     <tr>
                       <th className="min-w-[60px]">Rank</th>
-                      <th className="min-w-[260px]">Team</th>
+                      <th className="min-w-[300px]">Team</th>
                       <th className="min-w-[140px]">School</th>
-
                       <th className="min-w-[150px]">Total Points</th>
                       {contest.events.map((event, index) => (
                         <th className="min-w-[60px]" key={index}>
