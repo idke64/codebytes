@@ -10,7 +10,7 @@ function TimelineCard({ children, ...props }) {
       }`}
     >
       <div
-        className={`w-[45%] max-md:w-full rounded px-5 py-6 duration-200 flex gap-y-2 flex-col drop-shadow  bg-white relative before:bg-white max-md:before:hidden before:absolute before:w-6 before:h-6 before:top-[calc(50%-12px)] ${
+        className={`w-[45%] max-md:w-full rounded px-5 py-6 duration-200 flex gap-y-2 flex-col drop-shadow  bg-white relative before:bg-white max-md:before:hidden before:absolute before:w-6 before:h-6 before:top-[calc(50%-12px)] hover:border-palette-2 cursor-default ${
           props.position === "right"
             ? "before:-left-[12px] border-r-8 border-palette-3 "
             : "before:-right-[12px] border-l-8 border-palette-3 "

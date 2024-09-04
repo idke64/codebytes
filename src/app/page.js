@@ -54,15 +54,17 @@ function Home() {
               </h1>
 
               <div className="flex gap-3 justify-center">
-                <button className="btn secondary-btn h-10">
-                  <Link
-                    href={"https://discord.gg/vJtmme2MVr"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Discord
-                  </Link>
-                </button>
+                <Link
+                  href="https://discord.gg/vJtmme2MVr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn primary-btn h-10"
+                >
+                  Discord
+                </Link>
+                <Link href="/contests" className="btn secondary-btn h-10">
+                  Past Contests
+                </Link>
               </div>
             </div>
             {/* <div className="flex flex-col w-[560px] relative bottom-24 rounded-md overflow-hidden border-white">
@@ -92,7 +94,7 @@ function Home() {
             </div>
             <div className="grid grid-cols-2 max-md:grid-cols-1 gap-8">
               <div
-                className="py-8 bg-white flex items-center justify-center rounded px-2 shadow duration-200 gap-x-6 max-sm:gap-x-4 "
+                className="py-8 bg-white flex items-center justify-center rounded px-2 shadow duration-200 gap-x-6 max-sm:gap-x-4"
                 data-aos="zoom-in-out"
               >
                 <div className="bg-palette-5 rounded-lg self-start h-16 w-16 flex items-center justify-center">

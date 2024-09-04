@@ -37,11 +37,11 @@
   }
 
   .link {
-    @apply text-palette-1 underline hover:text-palette-2 cursor-pointer;
+    @apply text-palette-1 hover:text-palette-2 cursor-pointer;
   }
 
   .contest-container {
-    @apply bg-white w-full flex shadow px-8 py-6 rounded min-h-full min-h-[calc(100vh-292px)];
+    @apply bg-white w-full flex shadow px-8 py-6 rounded min-h-[calc(100vh-292px)];
   }
 
   .blog-container {
@@ -116,7 +116,7 @@
     @apply uppercase;
   }
   th {
-    @apply py-3 rounded-t font-semibold text-text-1 text-sm cursor-pointer text-start  border-b;
+    @apply py-3 rounded-t font-semibold text-text-1 text-sm cursor-pointer text-start border-b;
   }
   td {
     @apply py-3 max-w-[160px] text-[15px];

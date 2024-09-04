@@ -529,7 +529,6 @@ function ContestProblems() {
                   {!latestSubmission && !submission && (
                     <span className="disabled-info">
                       No submission available
-                      {!latestSubmission}
                     </span>
                   )}
                 </div>

@@ -83,16 +83,16 @@ function ProblemPage() {
         (contest && problemList && Date.now() > contest.end_time.toDate()) ? (
           <>
             <div className="flex flex-col gap-y-3">
-              <div className="rounded border overflow-hidden flex flex-col gap-y-3 px-4">
-                <table className="w-full">
+              <div className="rounded border overflow-x-auto flex flex-col gap-y-3 px-4">
+                <table className="w-full min-w-full">
                   <thead>
                     <tr>
-                      <th className="w-10"></th>
-                      <th>Points</th>
-                      <th>Name</th>
-                      <th>Time Limit</th>
-                      <th>Memory Limit</th>
-                      <th className="w-4"></th>
+                      <th className="min-w-[40px]"></th>
+                      <th className="min-w-[80px]">Points</th>
+                      <th className="min-w-[260px]">Name</th>
+                      <th className="min-w-[120px]">Time Limit</th>
+                      <th className="min-w-[120px]">Memory Limit</th>
+                      <th className="min-w-[20px]"></th>
                     </tr>
                   </thead>
                   <tbody>

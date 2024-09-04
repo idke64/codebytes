@@ -1,25 +1,18 @@
 "use client";
 import React from "react";
-import Markdown from "react-markdown";
 import Image from "next/image";
 import defaultprofile from "@/assets/pictures/defaultprofile.png";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faDashboard,
-  faGear,
-  faGears,
-  faPeopleGroup,
-  faWrench,
-} from "@fortawesome/free-solid-svg-icons";
+import { faDashboard, faWrench } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import NotFound from "@/components/NotFound";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "/src/aos-animations.css";
+import { uploadProfilePicture } from "@/config/storage";
 
 function DashboardLayout({ children }) {
   useEffect(() => {
@@ -31,10 +24,39 @@ function DashboardLayout({ children }) {
   });
   const route = usePathname();
   const { userData, user } = useAuth();
+  const [photoURL, setPhotoURL] = useState(defaultprofile);
+  const [pictureFile, setPictureFile] = useState(null);
 
   const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handlePictureUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        setErrorMsg("File size should be less than 2MB");
+        return;
+      }
+      if (!file.type.includes("image")) {
+        setErrorMsg("File should be an image");
+        return;
+      }
+
+      setPictureFile(file);
+    }
+  };
+
+  const handleSavePicture = async () => {
+    setLoading(true);
+    const url = await uploadProfilePicture(pictureFile, user);
+    setPhotoURL(url);
+    setLoading(false);
+  };
 
   useEffect(() => {
+    if (user?.photoURL) {
+      setPhotoURL(user.photoURL);
+    }
     setLoading(false);
   }, [user]);
 
@@ -52,9 +74,44 @@ function DashboardLayout({ children }) {
           <section className="page-margins py-8">
             <div className="flex gap-6">
               <div className="flex flex-col gap-y-6">
-                <div className="shadow py-4 px-8 flex items-center flex-col gap-y-4">
-                  <div className="w-40 h-40 rounded-full overflow-hidden relative">
-                    <Image src={defaultprofile} alt="profile picture" />
+                <div className="shadow py-4 px-8 flex items-center flex-col gap-y-1">
+                  <div className="flex flex-col gap-y-2">
+                    <div className="w-40 h-40 rounded-[50%] overflow-hidden relative flex justify-center group">
+                      <Image
+                        src={photoURL}
+                        width={500}
+                        height={500}
+                        className="w-full h-full object-cover"
+                        alt="profile picture"
+                      />
+                    </div>
+                    <div className="flex gap-x-2">
+                      <button
+                        disabled={loading}
+                        className="btn primary-btn h-9 overflow-hidden relative"
+                      >
+                        Upload
+                        <input
+                          className="h-full opacity-0 z-10 absolute left-0"
+                          onChange={handlePictureUpload}
+                          type="file"
+                        />
+                      </button>
+                      <div className="group relative flex justify-center">
+                        <button
+                          disabled={!pictureFile || loading}
+                          onClick={handleSavePicture}
+                          className="btn secondary-btn h-9"
+                        >
+                          Save
+                        </button>
+                        {!pictureFile && (
+                          <span className="disabled-info">
+                            No picture selected
+                          </span>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   <div className="flex flex-col items-center justify-center gap-y-1 w-full">

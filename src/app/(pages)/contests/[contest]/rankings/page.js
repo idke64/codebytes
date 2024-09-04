@@ -3,6 +3,9 @@ import { countDocuments, getCollection, getDocument } from "@/config/firestore";
 import { orderBy } from "firebase/firestore";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getProfilePicture } from "@/config/storage";
+import defaultprofile from "@/assets/pictures/defaultprofile.png";
+import Image from "next/image";
 
 function ContestRankings() {
   const params = useParams();
@@ -43,6 +46,13 @@ function ContestRankings() {
         participantsData[i].team_name = userData.team_name;
         participantsData[i].school = userData.school;
       }
+
+      for (let i = 0; i < participantsData.length; i++) {
+        participantsData[i].photoURL = await getProfilePicture(
+          participantsData[i].id
+        );
+      }
+      console.log(participantsData);
       setParticipants(participantsData);
     };
 
@@ -90,17 +100,17 @@ function ContestRankings() {
         {participants && participants.length != 0 ? (
           <>
             <div className="flex flex-col gap-y-3">
-              <div className="rounded border overflow-hidden flex flex-col gap-y-3 px-4">
+              <div className="rounded border overflow-x-auto flex flex-col gap-y-3 px-4">
                 <table className="w-full">
                   <thead>
                     <tr>
-                      <th>Rank</th>
-                      <th className="w-[30%]">Team Name</th>
-                      <th>School</th>
+                      <th className="min-w-[60px]">Rank</th>
+                      <th className="min-w-[260px]">Team</th>
+                      <th className="min-w-[140px]">School</th>
 
-                      <th>Total Points</th>
+                      <th className="min-w-[150px]">Total Points</th>
                       {contest.events.map((event, index) => (
-                        <th key={index}>
+                        <th className="min-w-[60px]" key={index}>
                           {event.split(" ").length > 1
                             ? event
                                 .split(" ")
@@ -115,7 +125,26 @@ function ContestRankings() {
                     {participants.map((participant, index) => (
                       <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{participant.team_name}</td>
+                        <td>
+                          <div className="flex items-center gap-x-1">
+                            <div className="rounded-[50%] overflow-hidden h-5 w-5">
+                              <Image
+                                src={
+                                  participant.photoURL
+                                    ? participant.photoURL
+                                    : defaultprofile
+                                }
+                                width={500}
+                                height={500}
+                                className="w-full h-full object-cover"
+                                alt="profile picture"
+                              />
+                            </div>
+                            <div className="whitespace-nowrap overflow-hidden overflow-ellipsis">
+                              {participant.team_name}
+                            </div>
+                          </div>
+                        </td>
                         <td>{participant.school}</td>
 
                         <td>

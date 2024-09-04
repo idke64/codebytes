@@ -65,7 +65,7 @@ function Dashboard() {
             </div>
             {/* {console.log(contests.length + " sdamoisdma")} */}
             {contests && userData && contests.length != 0 ? (
-              <div className="rounded border overflow-hidden flex flex-col gap-y-3 px-4">
+              <div className="rounded border flex flex-col gap-y-3 px-4 overflow-x-auto">
                 <table className="w-full">
                   <thead>
                     <tr>
