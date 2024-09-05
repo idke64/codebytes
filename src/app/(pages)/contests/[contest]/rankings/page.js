@@ -50,12 +50,6 @@ function ContestRankings() {
         participantsData[i].school = userData?.school;
       }
 
-      for (let i = 0; i < participantsData.length; i++) {
-        participantsData[i].photoURL = await getProfilePicture(
-          participantsData[i].id
-        );
-      }
-      console.log(participantsData);
       setParticipants(participantsData);
     };
 
@@ -128,23 +122,8 @@ function ContestRankings() {
                       <tr key={index}>
                         <td>{index + 1}</td>
                         <td>
-                          <div className="flex items-center gap-x-1">
-                            <div className="rounded-[50%] overflow-hidden h-5 w-5">
-                              <Image
-                                src={
-                                  participant.photoURL
-                                    ? participant.photoURL
-                                    : defaultprofile
-                                }
-                                width={500}
-                                height={500}
-                                className="w-full h-full object-cover"
-                                alt="profile picture"
-                              />
-                            </div>
-                            <div className="whitespace-nowrap overflow-hidden overflow-ellipsis">
-                              {participant.team_name}
-                            </div>
+                          <div className="whitespace-nowrap overflow-hidden overflow-ellipsis">
+                            {participant.team_name}
                           </div>
                         </td>
                         <td>{participant.school}</td>
