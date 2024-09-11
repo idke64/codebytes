@@ -1,9 +1,7 @@
 # Name: November Contest
 # Description
 
-CodeBytes's first contest hosted at Naperville Central High School. Includes pizza, drinks, prizes, and various activities!
-
-1
+CodeBytes's first contest hosted at Naperville Central High School. Includes pizza, drinks, prizes, and various activities! 
 
 # Rules
 

@@ -98,24 +98,31 @@ function ContestPage() {
                     </p>
                   </div>
 
-                  {Date.now() < contest.end_time.toDate() &&
-                    (user ? (
-                      <button
-                        onClick={() => handleRegistration()}
-                        className={`btn secondary-btn h-9 ${
-                          registered && "hidden"
-                        }`}
-                      >
-                        Register
-                      </button>
-                    ) : (
-                      <Link
-                        href={"/login"}
-                        className="btn secondary-btn h-9 my-0"
-                      >
-                        Register
-                      </Link>
-                    ))}
+                  <div className="relative group flex justify-center">
+                    <button
+                      onClick={() => handleRegistration()}
+                      className="btn primary-btn h-9 relative"
+                      disabled={
+                        !user ||
+                        registered ||
+                        Date.now() > contest.end_time.toDate()
+                      }
+                    >
+                      Register
+                    </button>
+                    {(!user ||
+                      registered ||
+                      Date.now() > contest.end_time.toDate()) && (
+                      <span className="disabled-info">
+                        {!user
+                          ? "Login or create an account to register"
+                          : registered
+                          ? "You are already registered"
+                          : Date.now() > contest.end_time.toDate() &&
+                            "Registration is closed"}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <hr className="w-full" />
               </div>
