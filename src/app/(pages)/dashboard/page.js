@@ -10,7 +10,7 @@ function Dashboard() {
   const { user, userData } = useAuth();
 
   const [submissions, setSubmissions] = useState();
-  const [contests, setContests] = useState([]);
+  const [contests, setContests] = useState();
 
   useEffect(() => {
     if ((user, userData)) {
@@ -64,7 +64,6 @@ function Dashboard() {
               <h3>Contests</h3>
               <hr />
             </div>
-            {/* {console.log(contests.length + " sdamoisdma")} */}
             {contests && userData && contests.length != 0 ? (
               <div className="rounded border flex flex-col gap-y-3 px-4 overflow-x-auto">
                 <table className="w-full">
@@ -103,8 +102,8 @@ function Dashboard() {
                   </tbody>
                 </table>
               </div>
-            ) : contests && (contests.length == 0 || contests == undefined) ? (
-              <p className="text-sm">No contests available</p>
+            ) : contests && contests.length == 0 ? (
+              <p className="text-sm">You have not participated in a contest</p>
             ) : (
               <div className="flex justify-center items-center w-full h-24">
                 <div className="loading-spinner-large"></div>
@@ -210,7 +209,7 @@ function Dashboard() {
               <p>No submissions available</p>
             ) : (
               <div className="flex justify-center items-center w-full h-24">
-                <div className="loading-spinner-large"></div>
+                <div className="loading-spinner-large" />
               </div>
             )}
           </div>

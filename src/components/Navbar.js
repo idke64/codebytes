@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,7 +9,9 @@ import {
   faArrowUpFromBracket,
   faBarsStaggered,
   faCaretDown,
+  faCaretRight,
   faCaretUp,
+  faChevronRight,
   faUpLong,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "@/assets/codebyteslogo.svg";
@@ -19,14 +21,17 @@ import { useAuth } from "@/context/AuthContext";
 import { getDocument } from "@/config/firestore";
 import AccountDropdown from "./AccountDropdown";
 import { useRouter } from "next/navigation";
-import Banner from "./Banner";
+import defaultprofile from "@/assets/pictures/defaultprofile.png";
 
 function Navbar() {
   const { user, logout } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const route = usePathname();
-  const router = useRouter();
+  const [photoURL, setPhotoURL] = useState(defaultprofile);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef();
+  const profileRef = useRef();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,6 +48,24 @@ function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleClickOutsideDropdown = (e) => {
+      if (
+        e.button == 0 &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target) &&
+        !profileRef.current.contains(e.target)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutsideDropdown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideDropdown);
+    };
+  }, []);
+
   const menuRef = useRef();
 
   const handleLogout = async () => {
@@ -50,7 +73,7 @@ function Navbar() {
   };
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleClickOutsideMenu = (e) => {
       if (
         e.button == 0 &&
         menuRef.current &&
@@ -60,10 +83,10 @@ function Navbar() {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutsideMenu);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutsideMenu);
     };
   }, []);
 
@@ -72,9 +95,13 @@ function Navbar() {
   useEffect(() => {
     if (user) {
       const fetchUserData = async () => {
-        const userData = await getDocument("users", user.uid);
+        const userData = await getDocument(["users"], user.uid);
+        console.log(userData);
         setUserData(userData);
       };
+      if (user?.photoURL) {
+        setPhotoURL(user.photoURL);
+      }
 
       fetchUserData();
     }
@@ -140,11 +167,8 @@ function Navbar() {
 
             {user ? (
               <>
-                <Link
-                  href={"/dashboard"}
-                  className="responsive-navlink gap-x-2 flex items-center"
-                >
-                  Account
+                <Link href={"/dashboard"} className="responsive-navlink">
+                  Dashboard
                 </Link>
                 <button
                   onClick={() => handleLogout()}
@@ -179,7 +203,7 @@ function Navbar() {
         } w-full h-[60px] z-40 transition-colors duration-200 `}
         data-aos="fade-in-down"
       >
-        <div className="h-full flex justify-between items-center page-margins">
+        <div className="h-full flex justify-between items-center page-margins relative">
           <div className="flex items-center gap-x-6 h-full">
             <Link href={"/"} className="flex items-center justify-center gap-1">
               <Image
@@ -277,7 +301,7 @@ function Navbar() {
           <div className="flex h-full items-center gap-x-3 max-lg:hidden">
             {user ? (
               <>
-                <button
+                {/* <button
                   onClick={() => handleLogout()}
                   className={`pb-0.5 font-semibold text-text-3 text-[15px] px-3 ${
                     route === "/" && !scrolled
@@ -286,10 +310,95 @@ function Navbar() {
                   }`}
                 >
                   Logout
+                </button> */}
+                <button
+                  onClick={() => setShowDropdown(!showDropdown)}
+                  className={`flex items-center gap-x-2  rounded px-3 py-1 ${
+                    route === "/" && !scrolled
+                      ? "hover:bg-palette-2/70"
+                      : "hover:bg-gray-100"
+                  }`}
+                  ref={profileRef}
+                >
+                  <div
+                    className={`font-semibold text-[15px] text-text-3 ${
+                      route === "/"
+                        ? scrolled
+                          ? "text-palette-1"
+                          : "text-white "
+                        : "text-palette-1"
+                    }`}
+                  >
+                    {userData?.team_name}
+                  </div>
+                  <div className="h-7 w-7 overflow-hidden justify-center flex items-center rounded-full bg-white">
+                    <Image
+                      className="w-full h-full "
+                      src={photoURL}
+                      alt="profile picture"
+                      width={200}
+                      height={200}
+                    />
+                  </div>
                 </button>
-                <Link href={"/dashboard"} className={`btn primary-btn h-9`}>
-                  Account
-                </Link>
+
+                <div
+                  ref={dropdownRef}
+                  className={`absolute px-3 top-14 py-4 drop-shadow right-0 bg-white rounded ${
+                    showDropdown
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-0 pointer-events-none"
+                  } duration-300 before:content-[''] before:absolute before:-top-1.5 before:right-[19px] before:border-l-[8px] before:border-r-[8px] before:border-b-[8px] before:border-l-transparent before:border-r-transparent before:border-b-white`}
+                >
+                  <div className="flex flex-col gap-y-2">
+                    <div className="flex justify-start items-center gap-x-2">
+                      <div className="flex items-center justify-center h-8 w-8 rounded-full overflow-hidden bg-white">
+                        <Image
+                          className="w-full h-full "
+                          src={photoURL}
+                          alt="profile picture"
+                          width={200}
+                          height={200}
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="leading-none text-sm">
+                          {userData?.team_name}
+                        </span>
+                        <p className="text-[11px] text-text-3 w-[160px] overflow-hidden">
+                          {userData?.email}
+                        </p>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="flex flex-col items-start">
+                      <Link
+                        href={"/dashboard"}
+                        className="dropdown-link"
+                        onClick={() => setShowDropdown(false)}
+                      >
+                        Dashboard
+                        <FontAwesomeIcon icon={faChevronRight} />
+                      </Link>
+                      <Link
+                        href={"/dashboard/settings"}
+                        className="dropdown-link"
+                        onClick={() => setShowDropdown(false)}
+                      >
+                        Settings
+                        <FontAwesomeIcon icon={faChevronRight} />
+                      </Link>
+                    </div>
+                    <hr />
+                    <button
+                      onClick={() => handleLogout()}
+                      className="dropdown-link"
+                    >
+                      Logout
+                      <FontAwesomeIcon icon={faChevronRight} />
+                    </button>
+                  </div>
+                </div>
               </>
             ) : (
               <>

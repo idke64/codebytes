@@ -4,13 +4,17 @@
 
 @layer components {
   .navlink {
-    @apply list-none font-semibold flex justify-center items-center text-[15px] h-full pb-0.5 px-3 hover:text-palette-1;
+    @apply list-none font-semibold flex justify-center items-center text-[15px] h-full px-3 hover:text-palette-1;
   }
   .active-navlink {
-    @apply list-none font-semibold flex justify-center items-center text-[15px] h-full pb-0.5 px-3 text-palette-1 bg-palette-3;
+    @apply list-none font-semibold flex justify-center items-center text-[15px] h-full px-3 text-palette-1 bg-palette-3;
   }
   .responsive-navlink {
-    @apply list-none w-full font-medium text-lg px-6 py-4 hover:bg-palette-2 hover:text-white duration-200;
+    @apply list-none w-full font-medium text-lg px-6 py-4 hover:bg-palette-2 hover:text-white duration-200 text-text-2;
+  }
+
+  .dropdown-link {
+    @apply text-text-3 font-medium w-full flex justify-between items-center text-[15px] h-full px-3 hover:bg-gray-100 rounded py-1.5;
   }
 
   .btn {

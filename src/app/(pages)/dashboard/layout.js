@@ -76,7 +76,7 @@ function DashboardLayout({ children }) {
               <div className="flex flex-col gap-y-6">
                 <div className="shadow py-4 px-8 flex items-center flex-col gap-y-1">
                   <div className="flex flex-col gap-y-2">
-                    <div className="w-40 h-40 rounded-[50%] overflow-hidden relative flex justify-center group">
+                    <div className="w-40 h-40 rounded-[50%] overflow-hidden relative flex justify-center group bg-white">
                       <Image
                         src={photoURL}
                         width={500}
