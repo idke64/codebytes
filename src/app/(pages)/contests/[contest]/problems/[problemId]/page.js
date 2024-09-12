@@ -92,7 +92,7 @@ function ContestProblems() {
   const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState();
   const [submissionId, setSubmissionId] = useState();
-  const router = useRouter();
+  const [submitError, setSubmitError] = useState("");
 
   const { user, userData } = useAuth();
 
@@ -175,6 +175,7 @@ function ContestProblems() {
 
   const handleCodeSubmit = async () => {
     try {
+      setSubmitError("");
       setSubmitted(true);
       setLoading(true);
       setSubmission(null);
@@ -195,6 +196,9 @@ function ContestProblems() {
       const submitResults = await submitResponse.json();
       if (submitResponse.ok) {
         if (submitResults.error) {
+          setSubmitError(
+            "There was an issue with your submission. Please try again."
+          );
           setLoading(false);
           return;
         }
@@ -231,21 +235,19 @@ function ContestProblems() {
           setLoading(false);
         }
       } else {
+        setSubmitError(
+          "There was an issue with your submission. Please try again."
+        );
         setLoading(false);
       }
     } catch (err) {
+      setSubmitError(
+        "There was an issue with your submission. Please try again."
+      );
       console.error(err);
       setLoading(false);
     }
   };
-
-  // if (
-  //   contest &&
-  //   problem &&
-  //   !contest.problems.some((p) => p.id === problem.id)
-  // ) {
-  //   return <NotFound />;
-  // }
 
   return (
     <>
@@ -444,7 +446,7 @@ function ContestProblems() {
                   onMount={handleEditorDidMount}
                 />
               </div>
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start max-md:flex-col max-md:gap-y-4">
                 <div className="flex flex-col">
                   <p className="text-sm">
                     * Your code will not be saved. It is recommended to use an
@@ -454,35 +456,41 @@ function ContestProblems() {
                     * Submissions may take up to 30 seconds to run
                   </p>
                 </div>
-                <div className="relative group flex justify-center">
-                  <button
-                    onClick={handleCodeSubmit}
-                    className="btn primary-btn h-9 relative"
-                    disabled={
-                      loading ||
-                      !user ||
+                <div className="flex flex-col items-end">
+                  <div className="relative group flex justify-center">
+                    <button
+                      onClick={handleCodeSubmit}
+                      className="btn primary-btn h-9 relative"
+                      disabled={
+                        loading ||
+                        !user ||
+                        !participant ||
+                        Date.now() > contest.end_time.toDate() ||
+                        Date.now() < contest.start_time.toDate()
+                      }
+                    >
+                      Submit
+                      {loading && <div className="loading-spinner-small"></div>}
+                    </button>
+                    {(!user ||
                       !participant ||
                       Date.now() > contest.end_time.toDate() ||
-                      Date.now() < contest.start_time.toDate()
-                    }
-                  >
-                    Submit
-                    {loading && <div className="loading-spinner-small"></div>}
-                  </button>
-                  {(!user ||
-                    !participant ||
-                    Date.now() > contest.end_time.toDate() ||
-                    Date.now() < contest.start_time.toDate()) && (
-                    <span className="disabled-info">
-                      {!user
-                        ? "Login to submit"
-                        : !participant
-                        ? "Register to submit"
-                        : (Date.now() > contest.end_time.toDate() ||
-                            Date.now() < contest.start_time.toDate()) &&
-                          "Submissions are only allowed during the contest"}
-                    </span>
-                  )}
+                      Date.now() < contest.start_time.toDate()) && (
+                      <span className="disabled-info">
+                        {!user
+                          ? "Login to submit"
+                          : !participant
+                          ? "Register to submit"
+                          : (Date.now() > contest.end_time.toDate() ||
+                              Date.now() < contest.start_time.toDate()) &&
+                            "Submissions are only allowed during the contest"}
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="text-sm text-red-500 flex text-right">
+                    {submitError}
+                  </p>
                 </div>
               </div>
               <div className="flex gap-y-2 flex-col">

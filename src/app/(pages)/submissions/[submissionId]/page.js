@@ -129,7 +129,7 @@ function Submission() {
                           </span>
                         ) : (
                           <span className="text-red-500 font-bold">
-                            Wrong Answer
+                            Not Accepted
                           </span>
                         )}
                       </td>
@@ -150,7 +150,7 @@ function Submission() {
           <hr />
           <div className="flex flex-col gap-y-2">
             <h4>Test Cases</h4>
-            <div className="w-full grid grid-cols-10 max-sm:grid-cols-2 gap-x-3 mt-3">
+            <div className="w-full grid grid-cols-10 max-sm:grid-cols-2 max-lg:grid-cols-5 gap-3 mt-3">
               {submission.status.map((status, index) => (
                 <TestcaseResult
                   key={index}

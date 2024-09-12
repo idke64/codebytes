@@ -112,6 +112,7 @@ async function getSubmissionData(url) {
     const intervalId = setInterval(async () => {
       try {
         const getResponse = await fetch(url, { method: "GET" });
+
         const results = await getResponse.text();
 
         const submissionData = JSON.parse(results).submissions;

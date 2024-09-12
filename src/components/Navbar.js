@@ -96,7 +96,6 @@ function Navbar() {
     if (user) {
       const fetchUserData = async () => {
         const userData = await getDocument(["users"], user.uid);
-        console.log(userData);
         setUserData(userData);
       };
       if (user?.photoURL) {
