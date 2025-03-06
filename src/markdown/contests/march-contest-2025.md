@@ -1,13 +1,13 @@
-# Name: April Contest 2024
+# Name: March Contest 2025
 # Description
 
-CodeBytes's third official contest, hosted on the 27th of April! Includes pizza, drinks, prizes, and various activities!
+CodeBytes's fourth contest hosted at Neuqua Valley High School. Includes pizza, drinks, prizes, and various activities!
 
 # Rules
 
 ##### Teams
 
-- Teams can only have up to 4 members.
+- Teams can only have up to 3 members.
 - A team's total points includes the sum of all the points earned from each events they participated in. Some events may have special requirements regarding their points. Be sure to review their information before the competition.
 - Teams must have a registered account to participate in the contest.
 - Cross-team communication is forbidden. This only applies to the competition. Conversation is permitted, but discussion of answers are not.
@@ -19,7 +19,7 @@ CodeBytes's third official contest, hosted on the 27th of April! Includes pizza,
 - Ties are broken based on the time of the last submission.
 - Sabotaging the performance of other teams is not allowed.
 - Clarifications will be posted throughout the contest on the clarifications tab.
-- Questions may be sent through our [discord](https://discord.gg/vJtmme2MVr) or directed at an organizer.
+- Questions may be sent through our [discord](https://stackblitz.com) or directed at an organizer.
 
 ##### Events
 
@@ -30,7 +30,7 @@ CodeBytes's third official contest, hosted on the 27th of April! Includes pizza,
 
 # Events
 
-#### Competitive Programming Problems (700 Points)
+#### Competitive Programming Problems (600 Points)
 
 ##### General Details
 
@@ -46,17 +46,6 @@ CodeBytes's third official contest, hosted on the 27th of April! Includes pizza,
 - The submission that earns the most points is the only one that contributes to the team's total score.
 - There is no penalty for incorrect submissions.
 
-##### Testcase Codes
-
-- NA - not attempted
-- AC - accepted
-- WA - wrong answer
-- TLE - time limit exceeded
-- RE - runtime error
-- CE - compilation error
-- LD - loading
-- ER - general error
-
 ##### Troubleshooting
 
 Some common problems you might encounter:
@@ -69,18 +58,44 @@ Some common problems you might encounter:
 
 ---
 
-#### Optimization (200 Points)
+#### Front-End Event (300 Points)
 
 ##### General Details
 
-- Teams will work to write code that best attempts to solve a coding problem without an optimal solution.
-- Problems do not have a "best" solution that works for the provided time constraints.
+- Teams will work to create a frontend application related to a prompt or theme.
+- Teams are free to use any frameworks, libraries, or tools available to them.
+- It is recommended to use [StackBlitz](https://stackblitz.com) to submit your source code but other methods are accepted ([Replit](https://replit.com), [CodePen](https://codepen.io), [GitHub](https://github.com))
+- You may optionally create a video to showcase specific aspects of your application.
 
 ##### Scoring
 
-- Each problem is worth 200 points with the point values being distributed based on the accuracy of the final answer.
-- Solutions will be graded based on the criteria specified in the problem statement.
+- Submissions will be judged based on a set criteria: Complexity, Functionality, Aesthetics, and Responsiveness.
+- Each criteria is scored from 0-10
+- Your total score will be your criteria score SCORE / 40 \* TOTAL_POINT_VALUE.
+- Multiple judges will review each submission to ensure fairness.
+- Resubmissions are allowed, and only the highest score will be counted.
 
 ##### Submissions
 
-- Submissions will be done through [Google Forms](https://forms.gle/1HujJuR37UP6wNak8) for this competition.
+- Projects should be submitted through this [Google Form](https://www.codebytes.codes)
+
+---
+
+#### Theoretical Assessment (700 Points)
+
+##### General Details
+
+- Teams will complete a quiz over computer science related concepts.
+- All submissions are final
+- The quiz is split into 3 sections: Bit Trivia, Brute Force, and Problem Statement
+- Bit Trivia is worth 100 points. This category dives into the history, complexities, and trivial matters of computing.
+- Brute Force is worth 200 points. This category is made up of a variety of multiple choice questions.
+- Problem Statement is worth 400 points. This category is made up of free response questions related to computational mathematics and theory.
+- Calculators are allowed, but external calculator programs are not.
+- Quizzes will be done on paper.
+- Teams cannot use the internet or any outside sources.
+- All answers are final once submitted and cannot be changed.
+
+##### Scoring
+
+- Some problems may be worth more than others
