@@ -18,7 +18,7 @@
   }
 
   .btn {
-    @apply font-bold px-4 rounded-lg duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-x-2 my-2 active:scale-90 disabled:pointer-events-none;
+    @apply font-bold px-4 rounded duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-x-2 my-2 active:scale-90 disabled:pointer-events-none;
   }
 
   .primary-btn {

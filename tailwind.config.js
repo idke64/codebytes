@@ -13,6 +13,9 @@ module.exports = {
       dropShadow: {
         DEFAULT: "rgba(27, 27, 35, 0.12) 0px 4px 12px",
       },
+      borderRadius: {
+        DEFAULT: "7px",
+      },
       colors: {
         palette: {
           1: "#6f5fc9",
