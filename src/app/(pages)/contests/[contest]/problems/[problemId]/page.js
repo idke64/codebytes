@@ -213,7 +213,7 @@ function ContestProblems() {
             contestId: contestId,
             contestName: contest.name,
             problemId: problemId,
-            problemName: problem.name,
+            problemName: problem?.name,
             language: file.name,
             sourceCode: editorRef.current
               .getValue()
@@ -254,19 +254,19 @@ function ContestProblems() {
       <section className="contest-container" data-aos="fade-in-up">
         {(problem &&
           contest &&
-          contest.problems.some((problem) => problem.id === problemId) &&
+          contest.problems.some((problem) => problem?.id === problemId) &&
           Date.now() > contest.start_time.toDate()) ||
         (userData && userData.admin) ? (
           <div className="flex flex-col gap-y-4 w-full">
             <div className="flex flex-col gap-y-3">
               <div className="flex flex-col gap-0.5">
                 <div className="flex justify-between">
-                  <h3>{problem.name}</h3>
+                  <h3>{problem?.name}</h3>
                 </div>
 
                 <p className="text-sm">
-                  Time Limit: {problem.time_limit} | Memory Limit:{" "}
-                  {problem.memory_limit} | Standard Input | Standard Output
+                  Time Limit: {problem?.time_limit} | Memory Limit:{" "}
+                  {problem?.memory_limit} | Standard Input | Standard Output
                 </p>
               </div>
 
@@ -278,17 +278,17 @@ function ContestProblems() {
                 <h5>Statement</h5>
 
                 <div className="flex flex-col gap-y-4">
-                  {problem.description?.split("\\n").map((line, index) => (
+                  {problem?.description?.split("\\n").map((line, index) => (
                     <p key={index}>
                       <Latex>{line}</Latex>
                     </p>
                   ))}
-                  {problem.image && (
+                  {problem?.image && (
                     <Image
                       className="float-right m-1 w-80 object-cover rounded-md border shadow"
                       width={500}
                       height={500}
-                      src={problem.image}
+                      src={problem?.image}
                       alt="picture"
                     />
                   )}
@@ -299,7 +299,7 @@ function ContestProblems() {
                 <div className="flex flex-col gap-y-2">
                   <h5>Input Format</h5>
 
-                  {problem.input_format?.split("\\n").map((line, index) => (
+                  {problem?.input_format?.split("\\n").map((line, index) => (
                     <p key={index}>
                       <Latex>{line}</Latex>
                     </p>
@@ -308,7 +308,7 @@ function ContestProblems() {
                 <div className="flex flex-col gap-y-2">
                   <h5>Output Format</h5>
 
-                  {problem.output_format?.split("\\n").map((line, index) => (
+                  {problem?.output_format?.split("\\n").map((line, index) => (
                     <p key={index}>
                       <Latex>{line}</Latex>
                     </p>
@@ -317,7 +317,7 @@ function ContestProblems() {
               </div>
               <hr className="w-full"></hr>
 
-              {problem.sample_inputs?.map((input, index) => (
+              {problem?.sample_inputs?.map((input, index) => (
                 <div className="flex flex-col gap-4" key={index}>
                   <div className="flex flex-col gap-y-3">
                     <h5>Sample Input {index + 1}</h5>
@@ -349,7 +349,7 @@ function ContestProblems() {
                       onClick={() =>
                         handleCopy(
                           1,
-                          problem.sample_outputs[index].replaceAll("\\n", `\n`)
+                          problem?.sample_outputs[index].replaceAll("\\n", `\n`)
                         )
                       }
                       ref={outputRef}
@@ -364,7 +364,7 @@ function ContestProblems() {
                       }}
                     >
                       <div className="flex flex-col font-mono">
-                        {problem.sample_outputs[index]
+                        {problem?.sample_outputs[index]
                           .split("\\n")
                           .map((line, index) => (
                             <span key={index}>{line}</span>
@@ -375,7 +375,7 @@ function ContestProblems() {
 
                   <div className="flex flex-col gap-y-2">
                     <h5>Sample Description</h5>
-                    {problem.sample_descriptions[index]
+                    {problem?.sample_descriptions[index]
                       ?.split("\\n")
                       .map((line, index) => (
                         <p key={index}>
@@ -391,7 +391,7 @@ function ContestProblems() {
           <ProblemNotFound path={"/contests/" + contestId + "/problems"} />
         ) : contest &&
           problem &&
-          !contest.problems.some((problem) => problem.id === problemId) ? (
+          !contest.problems.some((problem) => problem?.id === problemId) ? (
           <ProblemNotFound path={"/contests/" + contestId + "/problems"} />
         ) : contest && !problem ? (
           <ProblemNotFound path={"/contests/" + contestId + "/problems"} />
@@ -403,7 +403,7 @@ function ContestProblems() {
       </section>
       {problem &&
         contest &&
-        contest.problems.some((problem) => problem.id === problemId) && (
+        contest.problems.some((problem) => problem?.id === problemId) && (
           <section className="contest-container">
             <div className="flex flex-col gap-y-4 w-full">
               <div className="flex flex-col gap-y-3">

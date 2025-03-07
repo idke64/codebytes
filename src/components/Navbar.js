@@ -206,7 +206,7 @@ function Navbar() {
           <div className="flex items-center gap-x-6 h-full">
             <Link href={"/"} className="flex items-center justify-center gap-1">
               <Image
-                className="h-9 w-10"
+                className="h-9 w-10 object-contain"
                 src={route === "/" ? (scrolled ? logo : logoWhite) : logo}
                 alt="logo"
               />
@@ -332,28 +332,28 @@ function Navbar() {
                   </div>
                   <div className="h-7 w-7 overflow-hidden justify-center flex items-center rounded-full bg-white">
                     <Image
-                      className="w-full h-full "
+                      className="w-full h-full object-cover"
                       src={photoURL}
                       alt="profile picture"
-                      width={200}
-                      height={200}
+                      width={100}
+                      height={100}
                     />
                   </div>
                 </button>
 
                 <div
                   ref={dropdownRef}
-                  className={`absolute px-3 top-14 py-4 drop-shadow right-0 bg-white rounded ${
+                  className={`absolute top-14 pt-3 pb-2 drop-shadow right-0 bg-white rounded ${
                     showDropdown
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-0 pointer-events-none"
                   } duration-300 before:content-[''] before:absolute before:-top-1.5 before:right-[19px] before:border-l-[8px] before:border-r-[8px] before:border-b-[8px] before:border-l-transparent before:border-r-transparent before:border-b-white`}
                 >
                   <div className="flex flex-col gap-y-2">
-                    <div className="flex justify-start items-center gap-x-2">
-                      <div className="flex items-center justify-center h-8 w-8 rounded-full overflow-hidden bg-white">
+                    <div className="flex justify-start items-center gap-x-2 px-3">
+                      <div className="flex items-center justify-center h-7 w-7 rounded-full overflow-hidden bg-white">
                         <Image
-                          className="w-full h-full "
+                          className="w-full h-full object-cover"
                           src={photoURL}
                           alt="profile picture"
                           width={200}
@@ -364,13 +364,13 @@ function Navbar() {
                         <span className="leading-none text-sm">
                           {userData?.team_name}
                         </span>
-                        <p className="text-[11px] text-text-3 w-[160px] overflow-hidden">
+                        <p className="text-[10px] text-text-3 w-[120px] overflow-hidden">
                           {userData?.email}
                         </p>
                       </div>
                     </div>
                     <hr />
-                    <div className="flex flex-col items-start">
+                    <div className="flex flex-col items-start px-1">
                       <Link
                         href={"/dashboard"}
                         className="dropdown-link"
@@ -389,6 +389,7 @@ function Navbar() {
                       </Link>
                     </div>
                     <hr />
+                    <div className="px-1">
                     <button
                       onClick={() => handleLogout()}
                       className="dropdown-link"
@@ -396,6 +397,8 @@ function Navbar() {
                       Logout
                       <FontAwesomeIcon icon={faChevronRight} />
                     </button>
+                    </div>
+                    
                   </div>
                 </div>
               </>

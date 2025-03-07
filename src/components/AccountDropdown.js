@@ -11,7 +11,7 @@ function AccountDropdown(props) {
               : "scale-y-0"
           }`}
         >
-          hello
+          
         </div>
       </div>
     </>
